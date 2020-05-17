@@ -1,0 +1,12 @@
+button.btn.btn-default.btn-flat:hover{
+    background-color: #e7e7e7 !important;
+}
+
+.form-control.form-control-navbar:focus{
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.navbar-nav>.user-menu>.dropdown-menu>li.user-header{
+    height: auto !important;
+}

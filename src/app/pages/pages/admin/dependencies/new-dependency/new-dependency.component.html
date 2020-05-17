@@ -1,0 +1,36 @@
+<app-dashboard-header [title]="'Agregar nueva dependencia'"></app-dashboard-header>
+
+<section class="content">
+    <div class="row w-100">
+        <div class="col-md-6 mx-auto">
+            <div class="card register-card-body">
+                <div class="card-header bg-teal">
+                    Nueva dependencia
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="addDependency()" #fAddDependency=ngForm >
+                        <div class="alert alert-danger" *ngIf="error.name" >
+                            <strong>{{ error.name }}</strong>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" [(ngModel)]="dependency.name" name="name" required  class="form-control" placeholder="Nombre de la nueva dependencia">
+
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fa fa-code-fork"></span>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9"></div>
+                            <div class="col-md-3">
+                                <button type="submit" [disabled]="!fAddDependency.valid" class="btn btn-primary btn-block">Agregar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

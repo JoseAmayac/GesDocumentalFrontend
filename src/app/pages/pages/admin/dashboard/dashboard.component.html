@@ -1,0 +1,77 @@
+
+<app-dashboard-header [title]="'Información general'"></app-dashboard-header>
+
+<!-- Main content -->
+<section class="content" *ngIf="(information | async) as general" >
+  <div class="container-fluid">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+          <div class="inner">
+            <h3>150</h3>
+
+            <p>New Orders</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-bag"></i>
+          </div>
+          <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{ general.dependencies.length }}<sup style="font-size: 20px"></sup></h3>
+
+            <p>Dependencias registradas</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-md-git-commit  "></i>
+          </div>
+          <a routerLink="dependencies" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+          <div class="inner">
+            <h3>{{ general.users.length }}</h3>
+
+            <p>Usuarios registrados</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-ios-person"></i>
+          </div>
+          <a routerLink="users" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>65</h3>
+
+            <p>Unique Visitors</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-pie-graph"></i>
+          </div>
+          <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <!-- ./col -->
+    </div>
+    <!-- /.row -->
+    
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<app-error500 *ngIf="errorObject" ></app-error500>
+<!-- /.content -->

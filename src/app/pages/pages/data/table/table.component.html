@@ -1,0 +1,30 @@
+<table id="example2" datatable [dtOptions]="dtOptions" class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Documento</th>
+        <th>Estado</th>
+        <th>Creado en</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let document of documents" >
+      <td>{{ document.name }}</td>
+      <td>{{ document.description }}</td>
+      <td>
+        <a href="{{ document.filePath }}" download="{{ document.name }}">Descargar documento</a>
+      </td>
+      <td>
+        <span *ngIf="document.status === 1" >Esperando respuesta</span>
+      </td>
+      <td>{{ document.created_at|date }}</td>
+      <td>
+        <ul class="list-group dropdown">
+          hola
+        </ul>
+      </td>
+    </tr>
+  </tbody>  
+</table>

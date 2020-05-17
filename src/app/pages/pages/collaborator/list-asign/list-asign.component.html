@@ -1,0 +1,38 @@
+<div class="row w-100 mt-3" *ngIf="(documents|async) as documentos" >
+    
+    <div class="w-100">
+        <h1 class="text-center">Documentos en espera de asignación</h1>
+    </div>
+    <div class="col-12" *ngIf="documentos.length > 0;else vacio" >
+        <table id="example2" datatable [dtOptions]="dtOptions" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Documento</th>
+                <th>Creado en</th>
+                <th>Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let document of documentos" >
+              <td>{{ document.name }}</td>
+              <td>{{ document.description }}</td>
+              <td>
+                <a href="{{ document.filePath|file }}" target="_blank" download="{{ document.name }}">Descargar documento</a>
+              </td>
+              <td>{{ document.created_at|date }}</td>
+              <td class="text-center">
+                <button class="btn btn-default">Asignar dependencia</button>
+              </td>
+            </tr>
+          </tbody>  
+        </table>
+    </div>
+    <ng-template #vacio>
+        <div class="col-md-12 text-center" >
+            <h3>No encontramos nada</h3>
+            <p>No hay documentos por asignar dependencia actualmente</p>
+        </div>
+    </ng-template>
+</div>

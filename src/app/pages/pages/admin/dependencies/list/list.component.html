@@ -1,0 +1,58 @@
+<app-dashboard-header [title]="'Dependencias registradas'"></app-dashboard-header>
+
+
+<section class="content mx-md-3 mx-1" *ngIf="(dependencies|async) as depen">
+  <!-- Default box -->
+  <div class="card card-solid " *ngIf="depen.length > 0;else vacio" >
+    <div class="card-body pb-0">
+      <div class="row d-flex justify-content-center">
+        <div *ngFor="let dependency of depen"  class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+          <div class="card w-75 bg-light mx-auto">
+            <div class="card-body pt-0">
+              <div class="row" >
+                <div class="col">
+                  <h2 class="lead "><b>{{ dependency.name }}</b></h2>
+                  <p class="text-muted text-sm my-0"><b>Usuarios asociados: </b> {{ dependency.users.length }}</p>
+                  <p class="text-muted text-sm my-0"><b>Creada en: </b> {{ dependency.created_at | date}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="text-md-right text-center">
+                <a  (click)="eliminar(dependency)" class="btn btn-sm bg-danger my-2 my-md-0">
+                  <i class="fa fa-trash"></i> Eliminar dependencia
+                </a>
+                <a href="#" class="btn ml-2 btn-sm bg-teal" *ngIf="dependency.users.length > 0" >
+                  <i class="fa fa-eye"></i> Mostrar usuarios
+                </a>
+                <a href="#" class="btn ml-2 btn-sm bg-info" *ngIf="dependency.users.length < 1 " >
+                  <i class="fa fa-eye"></i> Agregar usuarios
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.card -->
+  <ng-template #vacio>
+      <div class="row w-100 mt-md-5">
+        <div class="col-md-6 mx-auto text-center">
+          <div class="d-block mx-auto">
+            <img width="75" height="75" src="assets/img/maths.svg" alt="Vacio">
+          </div>
+          <div class="ml-3 d-block mx-auto">
+            <h3 >No pudimos encontrar nada!</h3>
+            <p>Todavía no has agregado ninguna dependencia al sistema,<br> una vez lo hagas serán listadas aquí</p>
+
+            <a routerLink="add" class="btn btn-large bg-teal">Agregar dependencia</a>
+          </div>
+
+        </div>
+      </div>
+  </ng-template>
+
+</section>
+
+<app-error500 *ngIf="errorObject" ></app-error500>

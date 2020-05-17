@@ -1,0 +1,12 @@
+.form-control.form-control-navbar:focus{
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.bg-azul{
+    background-color: #3c8dbc;
+}
+
+.bg-azul li a.dropdown-toggle{
+    color: white;
+}

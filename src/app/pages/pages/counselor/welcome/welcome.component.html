@@ -1,0 +1,64 @@
+<div class="register-box mt-5 w-100 h-100  " >
+    <div class="w-50 text-center mx-auto">
+        <h5><b>Hola,</b> en el siguiente formulario podrás subir todos los documentos que lleguen en correspondencia, estos documentos deben estar escaneados y en formato pdf.</h5>
+    </div>
+    <div class="register-logo d-block mt-4">
+        <a routerLink="/counselor" ><b>Gestion</b>Documental</a>
+    </div>
+    
+    <div class="card w-100 justify-content-center align-items-center">
+        <div class="card-body w-50 register-card-body">
+            <p class="login-box-msg">Nuevo documento de correspondencia</p>
+            <form (ngSubmit)="uploadFile()"  #fnew=ngForm enctype="multipart/form-data">
+            <div class="input-group mb-3">
+                <input type="text"  class="form-control" placeholder="Nombre del archivo" name="name" [(ngModel)]="archivo.name" required>
+                <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fa fa-text-width"></span>
+                </div>
+                </div>
+
+                <div class="invalid-feedback" >
+                
+                </div>
+
+            </div>
+
+            <div class="custom-file mb-3">
+                <input (change)="addFile($event)" [(ngModel)]="archivo.file" type="file" lang="es" class="custom-file-input" id="customFile" accept="pdf" name="file" required>
+                <label class="custom-file-label" id="nombreArchivo" for="customFile">Documento escaneado(PDF)</label>
+                
+                <div class="invalid-feedback" >
+                
+                </div>
+            </div>
+
+            <div class="input-group mb-3 w-100">
+                <textarea class="form-control" name="description" id="" rows="4" placeholder="Anotaciones(opcional)" [(ngModel)]="archivo.description"></textarea>
+
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fa fa-comments"></span>
+                    </div>
+                </div>
+
+                <div class="invalid-feedback" >
+                
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-4 col-md-6">
+                </div>
+                <!-- /.col -->
+                <div class="col-8 col-md-6">
+                <button type="submit" [disabled]="!fnew.valid" class="btn btn-primary btn-block">Subir documento</button>
+                </div>
+                <!-- /.col -->
+            </div>
+            </form>
+            <a href="" id="enlace_descarga" download="comprobante.pdf"></a>
+        </div>
+        <!-- /.form-box -->
+    </div>
+</div>

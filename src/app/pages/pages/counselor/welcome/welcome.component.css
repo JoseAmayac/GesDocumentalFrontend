@@ -1,0 +1,16 @@
+.card{
+    box-shadow: none !important;
+}
+
+.card-body{
+    box-shadow: 0 0 15px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+}
+.custom-file-input ~ .custom-file-label::after {
+    content: "Elegir";
+}
+
+@media(max-width:576px){
+    .w-50{
+        width: 98% !important;
+    }
+}

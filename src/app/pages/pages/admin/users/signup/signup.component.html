@@ -1,0 +1,112 @@
+  <app-dashboard-header [title]="'Registrar nuevo usuario'"></app-dashboard-header>
+  <div class="cubierta" *ngIf="(dependencies|async) as depen" >
+    <div class="register-box" *ngIf="(roles|async) as newRoles" >
+        <div class="card">
+          <div class="card-body register-card-body">
+            <p class="login-box-msg">Registrar nuevo usuario</p>
+      
+            <form (ngSubmit)="register()" #fRegister=ngForm>
+              <div class="input-group mb-3">
+                <input type="text" [ngClass]="{'is-invalid':errorUsuario.name}" class="form-control" placeholder="Nombre" name="name" [(ngModel)]="usuario.name" >
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fa fa-user"></span>
+                  </div>
+                </div>
+
+                <div class="invalid-feedback" [hidden]="!errorUsuario.name">
+                  {{ errorUsuario.name }}
+                </div>
+
+              </div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" [ngClass]="{'is-invalid':errorUsuario.position}" placeholder="Cargo" name="position" [(ngModel)]="usuario.position" required>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fa fa-briefcase"></span>
+                  </div>
+                </div>
+                <div class="invalid-feedback" [hidden]="!errorUsuario.position">
+                  {{ errorUsuario.position }}
+                </div>
+              </div>
+
+              <div class="form-group mb-3">
+                <select name="role_id" (change)="verificarOpcion($event)" [ngClass]="{'is-invalid':errorUsuario.role_id}" [(ngModel)]="usuario.role_id" required class=" form-control select2" >
+                  <option [ngValue]="undefined" hidden>Seleccione un rol</option>
+
+                    <option value="{{ rol.id }}" *ngFor="let rol of newRoles">
+                        {{ rol.name }}
+                    </option>
+                </select>
+
+                <div class="invalid-feedback" [hidden]="!errorUsuario.role_id">
+                  {{ errorUsuario.role_id }}
+                </div>
+              </div>
+
+              <div class="form-group mb-3" >
+                <select name="dependency_id" [disabled]="orientador"  [ngClass]="{'is-invalid':errorUsuario.dependency_id}" aria-placeholder="Dependencia" [(ngModel)]="usuario.dependency_id" required class=" form-control select2" id="">
+                  <option [ngValue]="undefined" hidden>Seleccione una dependencia</option>
+
+                    <option value="{{ dependency.id }}" *ngFor="let dependency of depen">
+                        {{ dependency.name }}
+                    </option>
+                </select>
+
+                <div class="invalid-feedback" [hidden]="!errorUsuario.dependency_id">
+                  {{ errorUsuario.dependency_id }}
+                </div>
+
+              </div>
+              
+              <div class="input-group mb-3">
+                <input type="email" [pattern]="patron" [ngClass]="{'is-invalid':errorUsuario.email}" class="form-control" name="email" placeholder="Correo electrónico" [(ngModel)]="usuario.email" required> 
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fa fa-envelope"></span>
+                  </div>
+                </div>
+
+                <div class="invalid-feedback" [hidden]="!errorUsuario.email">
+                  {{ errorUsuario.email }}
+                </div>
+
+              </div>
+              <div class="input-group mb-3">
+                <input type="password" name="password" [ngClass]="{'is-invalid':errorUsuario.password}" [(ngModel)]="usuario.password" class="form-control" placeholder="Contraseña de acceso (minimo 6 caracteres)" required minlength="6">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fa fa-lock"></span>
+                  </div>
+                </div>
+
+                <div class="invalid-feedback" [hidden]="!errorUsuario.password">
+                  {{ errorUsuario.password }}
+                </div>
+
+              </div>
+
+              <div class="input-group mb-3">
+                <input type="password" name="password_confirmation" [(ngModel)]="usuario.password_confirmation" class="form-control" placeholder="Repita la contraseña de acceso (minimo 6 caracteres)" required minlength="6">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fa fa-lock"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4 col-md-6">
+                </div>
+                <!-- /.col -->
+                <div class="col-8 col-md-6">
+                  <button type="submit" [disabled]="!fRegister.valid" class="btn btn-primary btn-block">Registrar usuario</button>
+                </div>
+                <!-- /.col -->
+              </div>
+            </form>
+          </div>
+          <!-- /.form-box -->
+        </div>
+    </div>
+  </div>

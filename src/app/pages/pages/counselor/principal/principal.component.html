@@ -1,0 +1,7 @@
+<div class="container" *ngIf="(Obsusuario|async) as usuario">
+    <app-navbar [usuario]="usuario" ></app-navbar>
+    <ngx-loading-bar [fixed]=false [color]="'#111211'" [height]="'5px'" [diameter]="'22px'"></ngx-loading-bar>
+    <router-outlet ></router-outlet>
+</div>
+
+<app-error500 *ngIf="errorObject" ></app-error500>

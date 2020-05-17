@@ -1,0 +1,16 @@
+<div class="wrapper" *ngIf="(usuario | async) as usu" >
+    <app-top-nav [usuario]="usu"></app-top-nav>
+    <app-sidebar [usuario]="usu"></app-sidebar>
+    
+    <div class="content-wrapper">
+        <ngx-loading-bar [fixed]=false [color]="'#3580C2'" [height]="'3px'" [diameter]="'17px'"></ngx-loading-bar>
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+<app-error500 *ngIf="error" ></app-error500>
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.7)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Espere por favor... </p></ngx-spinner>
+
+
+

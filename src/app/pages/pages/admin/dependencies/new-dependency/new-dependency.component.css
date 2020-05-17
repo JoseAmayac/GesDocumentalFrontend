@@ -1,0 +1,11 @@
+.content{
+    align-items: center ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50%;
+}
+
+.register-card-body{
+    padding: unset  ;
+}

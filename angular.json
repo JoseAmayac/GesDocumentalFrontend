@@ -21,12 +21,51 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/ionicons/dist/css/ionicons.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.min.css",
+              "src/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
+              "src/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "src/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+              "src/assets/plugins/jqvmap/jqvmap.min.css",
+              "src/assets/css/adminlte.min.css",
+              "src/assets/plugins/daterangepicker/daterangepicker.css",
+              "src/assets/plugins/summernote/summernote-bs4.css",
+              "src/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css",
+              "src/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/plugins/jquery/jquery.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "src/assets/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "src/assets/plugins/daterangepicker/daterangepicker.js",
+              "src/assets/plugins/chart.js/Chart.min.js",
+              "src/assets/plugins/sparklines/sparkline.js",
+              "src/assets/plugins/jqvmap/jquery.vmap.min.js",
+              "src/assets/plugins/jqvmap/maps/jquery.vmap.usa.js",
+              "src/assets/plugins/jquery-knob/jquery.knob.min.js",
+              "src/assets/plugins/summernote/summernote-bs4.min.js",
+              "src/assets/plugins/moment/moment.min.js",
+              "src/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+              "src/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js",
+              "src/assets/plugins/select2/js/select2.full.min.js",
+              "src/assets/js/adminlte.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js",
+              "src/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js",
+              "src/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js",
+              "src/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js",
+              "src/assets/js/initMainPage.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -118,8 +157,38 @@
               "devServerTarget": "sisdocumental:serve:production"
             }
           }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/angular-toolkit:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "sisdocumental:ionic-cordova-build",
+            "devServerTarget": "sisdocumental:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "sisdocumental:ionic-cordova-build:production",
+              "devServerTarget": "sisdocumental:serve:production"
+            }
+          }
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/angular-toolkit:cordova-build",
+          "options": {
+            "browserTarget": "sisdocumental:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "sisdocumental:build:production"
+            }
+          }
         }
       }
-    }},
-  "defaultProject": "sisdocumental"
+    }
+  },
+  "defaultProject": "sisdocumental",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "css"
+    }
+  }
 }

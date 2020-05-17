@@ -1,0 +1,24 @@
+.cubierta1{
+    height: 100vh;
+    background-color: #e9ecef !important;
+}
+.cubierta{
+    align-items: center ;
+    display: flex;
+    flex-direction: column;
+    height: 75%;
+    justify-content: center;
+}
+
+@media(max-width:576px){
+    .cubierta{
+        height: 100vh;
+    }
+}
+select.form-control{
+    box-shadow: none;
+}
+
+.form-control{
+    border-radius: unset ;
+}

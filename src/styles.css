@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+    height: 100vh !important;
+}
+
+@media(max-width:576px){
+    .login-page{
+        align-items: unset !important;
+        padding-left: 0.3rem ;
+        padding-right: 0.3rem;
+    }
+}
+
+@media(max-width:576px){
+    .login-box{
+        width: 100% !important;
+    }
+}
+@media(max-width:576px){
+    .fondo{
+        background-color: #e9ecef !important;
+    }
+}

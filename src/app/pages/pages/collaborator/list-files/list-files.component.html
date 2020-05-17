@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-md-6 mx-auto my-4">
+        <h1 class="text-center">Documentos asignados </h1>
+    </div>
+</div>
+
+<div class="row" *ngIf="(documents|async) as docu">
+    <div class="col-12"  *ngIf="docu['documents'].length > 0">
+        <app-table   [documents]="docu['documents']"></app-table>
+    </div>
+    <div class="col-md-12 text-center" *ngIf="docu['documents'].length == 0" >
+        <h3>No encontramos nada</h3>
+        <p>No tienes documentos asignados actualmente</p>
+    </div>
+</div>
