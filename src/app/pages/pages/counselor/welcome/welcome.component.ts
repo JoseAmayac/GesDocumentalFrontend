@@ -84,7 +84,7 @@ export class WelcomeComponent implements OnInit {
     }
   }
 
-  downLoadFile(data: any, type: string) {
+downLoadFile(data: any, type: string) {
     var blob = new Blob([data], { type: type});
     
     var url = window.URL.createObjectURL(blob);

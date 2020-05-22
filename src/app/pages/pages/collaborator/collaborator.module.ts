@@ -14,6 +14,8 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client'
 import { DataTablesModule } from 'angular-datatables'
 import { PipesModule } from 'src/app/pipes/pipes.module';
 
+import { FormsModule } from '@angular/forms'
+
 @NgModule({
   declarations: [
     StartComponent,
@@ -22,6 +24,7 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
   ],
   imports: [
     DataModule,
+    FormsModule,
     DataTablesModule,
     LayoutsModule,
     PipesModule,

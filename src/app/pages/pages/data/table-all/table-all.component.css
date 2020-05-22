@@ -1,0 +1,14 @@
+i.fa:hover{
+    transform : scale(1.4);
+    -moz-transform : scale(1.4);      /* Firefox */
+    -webkit-transform : scale(1.4);   /* Chrome - Safari */
+    -o-transform : scale(1.4);        /* Opera */
+}
+
+i.fa{
+    /* Aumentamos la anchura y altura durante 2 segundos */
+    transition: width 0.5s, height 0.5s, transform 0.5s;
+    -moz-transition: width 0.5s, height 0.5s, -moz-transform 0.5s;
+    -webkit-transition: width 0.5s, height 0.5s, -webkit-transform 0.5s;
+    -o-transition: width 0.5s, height 0.5s,-o-transform 0.5s;
+}

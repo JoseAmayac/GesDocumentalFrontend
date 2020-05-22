@@ -11,9 +11,14 @@ import { ListComponent } from './dependencies/list/list.component';
 import { NewDependencyComponent } from './dependencies/new-dependency/new-dependency.component'
 
 import { FormsModule } from '@angular/forms'
+import { AllDocumentsComponent } from './documents/all-documents/all-documents.component';
+import { MyDocumentsComponent } from './documents/my-documents/my-documents.component';
+import { DataModule } from '../data/data.module';
 @NgModule({
   declarations: [
     DashboardComponent,
+    AllDocumentsComponent,
+    MyDocumentsComponent,
     UserListComponent,
     ListComponent,
     NewDependencyComponent,
@@ -22,6 +27,7 @@ import { FormsModule } from '@angular/forms'
   imports: [
     FormsModule,
     CommonModule,
+    DataModule,
     RouterModule,
     ComponentsModule,
     DataTablesModule

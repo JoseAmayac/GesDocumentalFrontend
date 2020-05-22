@@ -19,15 +19,66 @@
               <td>{{ document.name }}</td>
               <td>{{ document.description }}</td>
               <td>
-                <a href="{{ document.filePath|file }}" target="_blank" download="{{ document.name }}">Descargar documento</a>
+                <button class="btn btn-sucees btn-sm bg-teal" (click)="downLoadFile(document)">Descargar documento</button>
               </td>
               <td>{{ document.created_at|date }}</td>
               <td class="text-center">
-                <button class="btn btn-default">Asignar dependencia</button>
+                <button type="button" (click)="getDependencies(document)" class="btn btn-default" data-toggle="modal" data-target="#staticBackdrop">
+                  Asignar dependencia
+                </button>
               </td>
             </tr>
           </tbody>  
         </table>
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Dependencias disponibles</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div *ngIf="(dependencias|async) as dependencies;else loading">
+                <form (ngSubmit)="asignDependency()" #asignForm=ngForm>
+                  <div class="modal-body">
+                    <div class="form-group mb-3">
+                      <select name="dependency_id" [ngClass]="{'is-invalid':errorAsignandoDependencia}" [(ngModel)]="dependency_id" required class=" form-control select2" >
+
+                        <option [ngValue]="undefined" hidden>Seleccione una dependencia</option>
+      
+                          <option class="gorditos" value="{{ dependency.id }}" *ngFor="let dependency of dependencies" >
+                            {{ dependency.name }}
+                          </option>
+                      </select>
+      
+                      <div class="invalid-feedback" [hidden]="!errorAsignandoDependencia">
+                        {{ errorAsignandoDependencia }}
+                      </div>
+                    </div>
+                  
+                  </div>
+                
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" [disabled]="!asignForm.valid" class="btn btn-primary">Asignar dependencia</button>
+                  </div>
+                </form>
+              </div>
+              <ng-template #loading>
+                <h4 class="text-center my-3">
+                  Cargando dependencias....
+                </h4>
+              </ng-template>
+
+              <ng-template *ngIf="errorDependencies" >
+                <app-error500></app-error500>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+
     </div>
     <ng-template #vacio>
         <div class="col-md-12 text-center" >
@@ -35,4 +86,6 @@
             <p>No hay documentos por asignar dependencia actualmente</p>
         </div>
     </ng-template>
+
+    <a href="" hidden id="enlace_descarga" download> </a>
 </div>

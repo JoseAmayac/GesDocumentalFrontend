@@ -20,7 +20,9 @@ export interface Role{
 
 export interface GeneralInformation{
     users?: Usuario[],
-    dependencies?: Dependency[]
+    dependencies?: Dependency[],
+    waiting?: Document[],
+    documents?:Document[]
 }
 
 export interface Dependency{
@@ -43,7 +45,19 @@ export interface Document{
     id?:number,
     name?:string,
     description?:string,
+    updated_at?:Date,
     created_at?:Date,
     filePath?:string,
-    status?:number
+    status?:number,
+    response?:Respuesta,
+    dependency?:Dependency
+}
+
+export interface Respuesta{
+    id?:number,
+    description?:string,
+    file?:File,
+    filePath?:string,
+    created_at?:Date,
+    document_id?:any
 }

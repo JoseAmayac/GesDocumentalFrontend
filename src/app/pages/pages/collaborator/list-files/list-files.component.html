@@ -6,7 +6,7 @@
 
 <div class="row" *ngIf="(documents|async) as docu">
     <div class="col-12"  *ngIf="docu['documents'].length > 0">
-        <app-table   [documents]="docu['documents']"></app-table>
+        <app-table (respondido)="procesarRespuesta($event)"  [documents]="docu['documents']"></app-table>
     </div>
     <div class="col-md-12 text-center" *ngIf="docu['documents'].length == 0" >
         <h3>No encontramos nada</h3>

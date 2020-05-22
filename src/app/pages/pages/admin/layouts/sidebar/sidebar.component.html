@@ -17,7 +17,7 @@
             <img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <span class="text-white d-block"  >{{ usuario.name }}</span>
+            <span class="text-white d-block">{{ usuario.name }}</span>
           </div>
         </div>
 
@@ -85,6 +85,31 @@
                   <a routerLink="dependencies/add"  routerLinkActive="active"   class="nav-link">
                     <i class="fa fa-circle-thin nav-icon"></i>
                     <p>Agregar dependencia</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- DropDown del menú de documentos -->
+            <li class="nav-item has-treeview mx-2">
+              <a href="#"  class="nav-link link_arriba">
+                <i class="nav-icon fa fa-file-pdf-o"></i>
+                <p>
+                  Documentos
+                  <i class="right fa fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a routerLink="documents/asign"  routerLinkActive="active" class="nav-link">
+                    <i class="fa fa-circle-thin nav-icon"></i>
+                    <p>Mis documentos</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a routerLink="documents" [routerLinkActiveOptions]="{exact: true}"  routerLinkActive="active"   class="nav-link">
+                    <i class="fa fa-circle-thin nav-icon"></i>
+                    <p>Documentos totales</p>
                   </a>
                 </li>
               </ul>

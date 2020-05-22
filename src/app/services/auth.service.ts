@@ -49,47 +49,55 @@ export class AuthService {
   async validarToken():Promise<boolean>{
     await this.cargarToken();
 
-    return new Promise<boolean>(resolve=>{
-      if (!this.token) {
-        this.router.navigateByUrl('/auth')
-        resolve(false);
-      } else {
-        resolve(true)
-      }
-    })
-  }
-
-
-  async validarRol(rol:string,rolAlterno?:string){
+    if (!this.token) {this.router.navigateByUrl('/auth')
+      return Promise.resolve(false);  
+    }
     return new Promise<boolean>(resolve=>{
       this.getUser().subscribe(
         res=>{
           this.usuario = res;
-          if (res.role.name === rol || res.role.name === rolAlterno) {
-            resolve(true)
-          } else {
-            switch (res.role.name) {
-              case 'administrador':
-                this.router.navigateByUrl('/dashboard')
-                resolve(false)
-                break;
-              case 'orientador':
-                this.router.navigateByUrl('/counselor')
-                resolve(false)
-                break;
-              case 'archivo':
-                this.router.navigateByUrl('/list')
-                resolve(false)
-                break;
-              case 'usuario':
-                this.router.navigateByUrl('/list')
-                resolve(false)
-                break;
-            }
-          }
+          resolve(true);
+        },
+        err=>{
+          this.logoutAlternative(false);
+          // this.router.navigateByUrl('/auth');
+          resolve(false);
         }
-      )
+      )   
+      
     })
+  }
+
+
+  async validarRol(rol:string,rolAlterno?:string){    
+    
+    if (!this.usuario) {
+      await this.validarToken()
+    }
+    const res = this.usuario;
+
+    if (res.role.name === rol || res.role.name === rolAlterno) {
+      return true
+    } else {
+      switch (res.role.name) {
+        case 'administrador':
+          this.router.navigateByUrl('/dashboard')
+          return false;
+          break;
+        case 'orientador':
+          this.router.navigateByUrl('/counselor')
+          return false;
+          break;
+        case 'archivo':
+          this.router.navigateByUrl('/list')
+          return false;
+          break;
+        case 'usuario':
+          this.router.navigateByUrl('/list')
+          return false;
+          break;
+      }
+    }
   }
 
   getRoles(){

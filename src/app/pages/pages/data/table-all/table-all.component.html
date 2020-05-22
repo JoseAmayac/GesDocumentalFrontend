@@ -1,0 +1,123 @@
+<table id="example2" datatable [dtOptions]="dtOptions" class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Documento</th>
+        <th>Estado</th>
+        <th>Creado en</th>
+        <th>Respondido en</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let document of documents" >
+      <td>{{ document.name }}</td>
+      <td>{{ document.description }}</td>
+      <td class="text-center">
+        <button class="btn btn-sucees btn-sm bg-teal" (click)="downLoadFile(document)">Descargar documento</button>
+      </td>
+      <td>
+        <span *ngIf="document.status === 0" >Esperando asignación</span>
+        <span *ngIf="document.status === 1" >Esperando respuesta</span>
+        <span *ngIf="document.status === 2" >
+          Documento respondido
+        </span>
+      </td>
+      <td>{{ document.created_at|date }}</td>
+      <td>
+        <span *ngIf="document.status === 2;else sinRespuesta" >
+          {{ document.updated_at|date }}
+        </span>
+        <ng-template #sinRespuesta>
+          Sin responder aún
+        </ng-template>
+      </td>
+      <td class="text-center">
+        <button data-toggle="tooltip" data-placement="top" title="Eliminar" class="btn "(click)="eliminar(document)"><i class="fa fa-trash" style="color: red;font-size: 1.3rem;"></i></button>
+        
+        <button *ngIf="document.status === 2" data-toggle="modal" data-target="#exampleModal" class="btn"  (click)="definirDocumento(document)">
+          <i data-toggle="tooltip" data-placement="top" title="Ver en detalle" style="font-size: 1.3rem;" class="fa fa-eye"></i>
+        </button>
+
+      </td>
+    </tr>
+  </tbody>  
+</table>
+  
+<a href="" hidden id="enlace_descarga" download> </a>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Información detallada del documento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row w-100">
+          <div class="col-12 ">
+            <div class="card card-primary card-outline card-outline-tabs">
+              <div class="card-header p-0 border-bottom-0">
+                <ul class="nav nav-tabs " id="custom-tabs-four-tab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">Info documento</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">Info respuesta</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill" href="#custom-tabs-four-messages" role="tab" aria-controls="custom-tabs-four-messages" aria-selected="false">Info dependencia</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body" *ngIf="documentSelected" >
+                <div class="tab-content" id="custom-tabs-four-tabContent">
+                  <div class=" tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                    <h6><b>Nombre</b></h6>
+                    <p>{{ documentSelected.name }}</p>
+                    <h6><b>Descripción </b></h6>
+                    <p>{{ documentSelected.description }}</p>
+                    <h6><b>Estado</b></h6>
+                    <p>Documento respondido</p>
+                    <h6><b>Fecha de creación</b></h6>
+                    <p>{{ documentSelected.created_at|date }}</p>
+                    <h6><b>Fecha de respuesta</b></h6>
+                    <p>{{ documentSelected.response.created_at|date }}</p>
+                    <h6><b>Archivo del documento</b></h6>
+                    <button class="btn bg-teal" (click)="downLoadFile(documentSelected)">Descargar documento</button>
+                    
+
+                  </div>
+                  <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+                    <h6><b>Descripción </b></h6>
+                    <p>{{ documentSelected.response.description }}</p>
+                    <h6><b>Fecha de creación</b></h6>
+                    <p>{{ documentSelected.response.created_at|date }}</p>
+                    <h6><b>Dependencia encargada</b></h6>
+                    <p>{{ documentSelected.dependency.name }}</p>
+                    <h6><b>Archivo de la respuesta</b></h6>
+                    <button class="btn bg-teal" (click)="downloadResponse(documentSelected)">Descargar documento</button>
+                  </div>
+                  <div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel" aria-labelledby="custom-tabs-four-messages-tab">
+                    <h6><b>Nombre</b></h6>
+                    <p>{{ documentSelected.dependency.name }}</p>
+                    <h6><b>Fecha de creación</b></h6>
+                    <p>{{ documentSelected.dependency.created_at|date }}</p>
+                    <h6><b>Usuarios asociados</b></h6>
+                    <p>{{ documentSelected.dependency.users.length }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<app-dashboard-header [title]="'Documentos asignados'"></app-dashboard-header>
+
+<div *ngIf="(documents|async) as documentos" class="mx-3">
+    <app-table (respondido)="actualizarTabla($event)" [documents]="documentos['documents']" *ngIf="documentos['documents'].length > 0;else vacio" ></app-table>
+
+    <ng-template #vacio >
+        <div class="text-center w-100">
+            <h3 >
+                No hay nada aquí
+            </h3>
+            <p>
+                No tienes documentos asignados para procesar
+            </p>
+        </div>
+    </ng-template>
+</div>
+
+<app-error500 *ngIf="errorObject" ></app-error500>

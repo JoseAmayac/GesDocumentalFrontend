@@ -1,0 +1,15 @@
+button.btn.btn-default:hover{
+    border-color: teal;
+}
+
+select.form-control{
+    box-shadow: none;
+}
+
+.form-control{
+    border-radius: unset ;
+}
+
+option.gorditos{
+    font-size: 120% !important;
+}

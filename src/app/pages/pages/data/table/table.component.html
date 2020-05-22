@@ -14,7 +14,7 @@
       <td>{{ document.name }}</td>
       <td>{{ document.description }}</td>
       <td>
-        <a href="{{ document.filePath }}" download="{{ document.name }}">Descargar documento</a>
+        <button class="btn btn-sucees btn-sm bg-teal" (click)="downLoadFile(document)">Descargar documento</button>
       </td>
       <td>
         <span *ngIf="document.status === 1" >Esperando respuesta</span>
@@ -22,9 +22,45 @@
       <td>{{ document.created_at|date }}</td>
       <td>
         <ul class="list-group dropdown">
-          hola
+          <button class="btn btn-sucees btn-sm btn-primary" data-toggle="modal" data-target="#staticBackdrop" (click)="definirDocumento(document)">Responder</button>
         </ul>
       </td>
     </tr>
   </tbody>  
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Responder a solicitud</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form (ngSubmit)="responder()" #fRespuesta=ngForm>
+        <div class="modal-body">
+          <div class="form-group">
+            <textarea name="description" [(ngModel)]="respuesta.description" id="" class="form-control" required placeholder="Descripción de la respuesta"></textarea>
+          </div>
+
+          <div class="custom-file mb-3">
+            <input (change)="addFile($event)" type="file" lang="es" class="custom-file-input" id="customFile" accept="pdf" name="file">
+            <label class="custom-file-label" id="nombreArchivo" for="customFile">Documento escaneado(PDF)</label>
+            
+            <div class="invalid-feedback" >
+            
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" [disabled]="!fRespuesta.valid"  class="btn btn-primary">Enviar respuesta</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<a href="" hidden id="enlace_descarga" download> </a>

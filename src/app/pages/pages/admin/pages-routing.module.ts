@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StartComponent } from './start/start.component';
@@ -7,6 +8,9 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { ListComponent } from './dependencies/list/list.component';
 import { NewDependencyComponent } from './dependencies/new-dependency/new-dependency.component';
 import { RolGuard } from 'src/app/guards/rol.guard';
+import { AllDocumentsComponent } from './documents/all-documents/all-documents.component';
+import { MyDocumentsComponent } from './documents/my-documents/my-documents.component';
+
 
 const routes: Routes = [
     {
@@ -43,6 +47,22 @@ const routes: Routes = [
               path: 'add',
               component: NewDependencyComponent,
               data:['administrador'],
+            }
+          ]
+        },
+        {
+          path:'documents',
+          data:['administrador'],
+          children:[
+            {
+              path:'',
+              component:AllDocumentsComponent,
+              data:['administrador']
+            },
+            {
+              path:'asign',
+              component:MyDocumentsComponent,
+              data:['administrador']
             }
           ]
           

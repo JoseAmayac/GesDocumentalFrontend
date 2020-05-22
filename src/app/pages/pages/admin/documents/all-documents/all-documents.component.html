@@ -1,0 +1,12 @@
+<app-dashboard-header [title]="'Documentos guardados'"></app-dashboard-header>
+
+<div class="mx-3" *ngIf="(documents|async) as documentos" >
+    <app-table-all (actualizar)="refreshData($event)" [documents]="documentos['documents']" *ngIf="documentos['documents'].length > 0;else vacio" ></app-table-all>
+
+    <ng-template #vacio>
+        <div class="w-100 text-center">
+            <h3>No hay documentos</h3>
+            <p>Todavía no ha sido guardado ningún documento en el sistema</p>
+        </div>
+    </ng-template>
+</div>

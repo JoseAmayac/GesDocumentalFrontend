@@ -4,7 +4,7 @@
   <div class="card card-solid">
     <div class="card-body pb-0">
       <div class="row d-flex align-items-stretch">
-        <div *ngFor="let usuario of usuariosN"  class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+        <div *ngFor="let usuario of usuariosN['users']"  class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
           <div class="card bg-light">
             <div class="card-header text-muted border-bottom-0" *ngIf="usuario.dependency_id" >
               {{ usuario.dependency.name }}
@@ -26,15 +26,15 @@
             </div>
             <div class="card-footer">
               <div class="text-md-right text-center">
-                <a (click)="eliminar(usuario)" class="btn btn-sm my-2 my-md-0 bg-danger">
+                <a *ngIf="usuario.id !== usuariosN['user'].id"  (click)="eliminar(usuario)" class="btn btn-sm my-2 my-md-0 bg-danger">
                   <i class="fa fa-trash"></i> Eliminar usuario
                 </a>
-                <a href="#" class="ml-2 btn btn-sm btn-primary" *ngIf="!usuario.dependency_id" >
+                <!-- <a href="#" class="ml-2 btn btn-sm btn-primary" *ngIf="!usuario.dependency_id" >
                   <i class="fa fa-code-fork" ></i> Asignar dependencia
                 </a>
                 <a href="#" class="ml-2 btn btn-sm  bg-teal" *ngIf="usuario.dependency_id" >
                   <i class="fa fa-code-fork" ></i> Cambiar dependencia
-                </a>
+                </a> -->
               </div>
             </div>
           </div>

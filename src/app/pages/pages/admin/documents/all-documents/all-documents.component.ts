@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Document } from 'src/app/interfaces/interfaces';
 import { Observable, throwError } from 'rxjs';
+import { Document } from 'src/app/interfaces/interfaces';
 import { DocumentService } from 'src/app/services/document.service';
 import { catchError } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-list-files',
-  templateUrl: './list-files.component.html',
-  styleUrls: ['./list-files.component.css']
+  selector: 'app-all-documents',
+  templateUrl: './all-documents.component.html',
+  styleUrls: ['./all-documents.component.css']
 })
-export class ListFilesComponent implements OnInit {
-
-  documents:Observable<Document[]>;
+export class AllDocumentsComponent implements OnInit {
+  documents: Observable<Document[]>;
   errorObject = null;
 
   constructor(private service:DocumentService) { }
@@ -20,23 +19,19 @@ export class ListFilesComponent implements OnInit {
     this.getData()
   }
 
-  procesarRespuesta(event){
-    if (event) {
-      this.getData()
-    }
-  }
-
   getData(){
-    this.documents = this.service.getForDependency().pipe(
+    this.documents = this.service.getAllDocumets().pipe(
       catchError(err=>{
         this.errorObject = err
-        console.log(this.errorObject);
-        
         return throwError(err)
       })
     )
   }
 
-  
+  refreshData(event){
+    if (event) {
+      this.getData()
+    }
+  }
 
 }
