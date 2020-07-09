@@ -36,7 +36,6 @@ export class AuthInterceptorService implements HttpInterceptor{
                   catchError((e)=>{
                     this.refreshTokenInProgress = false;
                     this.authService.logoutAlternative(true)
-                    // return throwError(e)
                     return next.handle(this.injectToken(request))
                   })
               );

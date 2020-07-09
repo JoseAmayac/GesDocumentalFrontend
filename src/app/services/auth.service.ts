@@ -49,7 +49,8 @@ export class AuthService {
   async validarToken():Promise<boolean>{
     await this.cargarToken();
 
-    if (!this.token) {this.router.navigateByUrl('/auth')
+    if (!this.token) {
+      this.router.navigateByUrl('/auth')
       return Promise.resolve(false);  
     }
     return new Promise<boolean>(resolve=>{

@@ -4,6 +4,7 @@ import { Usuario } from 'src/app/interfaces/interfaces';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
+
 declare var $:any;
 declare const AppMia:any;
 
